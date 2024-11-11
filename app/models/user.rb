@@ -11,7 +11,7 @@ class User < ApplicationRecord
     if coordinates.present?
       self[:primary_address] = { "latitude" => coordinates[0], "longitude" => coordinates[1] }
     else
-      self[:primary_address] = nil  # or handle it as needed
+      self[:primary_address] = nil
     end
   end
 
@@ -19,7 +19,7 @@ class User < ApplicationRecord
     if coordinates.present?
       self[:secondary_address] = { "latitude" => coordinates[0], "longitude" => coordinates[1] }
     else
-      self[:secondary_address] = nil  # or handle it as needed
+      self[:secondary_address] = nil
     end
   end
 end
