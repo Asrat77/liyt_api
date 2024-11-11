@@ -17,11 +17,28 @@ RSpec.describe "/users", type: :request do
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      phone_number: Faker::PhoneNumber.phone_number,
+      email: Faker::Internet.email,
+      password_digest: "MyString",  # You may want to use a hashed password in a real scenario
+      business_name: Faker::Company.name,
+      business_email: Faker::Internet.email,
+      primary_address: { "latitude" => Faker::Address.latitude, "longitude" => Faker::Address.longitude },
+      secondary_address: { "latitude" => Faker::Address.latitude, "longitude" => Faker::Address.longitude }
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      first_name: nil,
+      last_name: nil,
+      phone_number: nil,
+      email: nil,
+      business_name: nil,
+      primary_address: nil
+    }
   }
 
   # This should return the minimal set of values that should be in the headers
@@ -85,7 +102,16 @@ RSpec.describe "/users", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          first_name: Faker::Name.first_name,
+          last_name: Faker::Name.last_name,
+          phone_number: Faker::PhoneNumber.phone_number,
+          email: Faker::Internet.email,
+          business_name: Faker::Company.name,
+          business_email: Faker::Internet.email,
+          primary_address: { "latitude" => Faker::Address.latitude, "longitude" => Faker::Address.longitude },
+          secondary_address: { "latitude" => Faker::Address.latitude, "longitude" => Faker::Address.longitude }
+        }
       }
 
       it "updates the requested user" do
@@ -93,7 +119,12 @@ RSpec.describe "/users", type: :request do
         patch user_url(user),
               params: { user: new_attributes }, headers: valid_headers, as: :json
         user.reload
-        skip("Add assertions for updated state")
+        expect(user.first_name).to eq(new_attributes[:first_name])
+        expect(user.last_name).to eq(new_attributes[:last_name])
+        expect(user.phone_number).to eq(new_attributes[:phone_number])
+        expect(user.email).to eq(new_attributes[:email])
+        expect(user.business_name).to eq(new_attributes[:business_name])
+        expect(user.business_email).to eq(new_attributes[:business_email])
       end
 
       it "renders a JSON response with the user" do

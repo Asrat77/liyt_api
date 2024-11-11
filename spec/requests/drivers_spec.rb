@@ -17,11 +17,21 @@ RSpec.describe "/drivers", type: :request do
   # Driver. As you add validations to Driver, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      vehicle_type: 1,  # Assuming vehicle_type is an integer
+      license_plate_number: Faker::Vehicle.license_plate
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      first_name: nil,
+      last_name: nil,
+      vehicle_type: nil,
+      license_plate_number: nil
+    }
   }
 
   # This should return the minimal set of values that should be in the headers
@@ -85,7 +95,12 @@ RSpec.describe "/drivers", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          first_name: Faker::Name.first_name,
+          last_name: Faker::Name.last_name,
+          vehicle_type: 2,  # Assuming a different vehicle type
+          license_plate_number: Faker::Vehicle.license_plate
+        }
       }
 
       it "updates the requested driver" do
@@ -93,7 +108,10 @@ RSpec.describe "/drivers", type: :request do
         patch driver_url(driver),
               params: { driver: new_attributes }, headers: valid_headers, as: :json
         driver.reload
-        skip("Add assertions for updated state")
+        expect(driver.first_name).to eq(new_attributes[:first_name])
+        expect(driver.last_name).to eq(new_attributes[:last_name])
+        expect(driver.vehicle_type).to eq(new_attributes[:vehicle_type])
+        expect(driver.license_plate_number).to eq(new_attributes[:license_plate_number])
       end
 
       it "renders a JSON response with the driver" do

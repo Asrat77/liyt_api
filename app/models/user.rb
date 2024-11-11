@@ -8,7 +8,7 @@ class User < ApplicationRecord
   # validates :primary_address, presence: true
 
   def primary_address=(coordinates)
-    if coordinates.present? && coordinates.is_a?(Array) && coordinates.size == 2
+    if coordinates.present?
       self[:primary_address] = { "latitude" => coordinates[0], "longitude" => coordinates[1] }
     else
       self[:primary_address] = nil  # or handle it as needed
@@ -16,7 +16,7 @@ class User < ApplicationRecord
   end
 
   def secondary_address=(coordinates)
-    if coordinates.present? && coordinates.is_a?(Array) && coordinates.size == 2
+    if coordinates.present?
       self[:secondary_address] = { "latitude" => coordinates[0], "longitude" => coordinates[1] }
     else
       self[:secondary_address] = nil  # or handle it as needed
