@@ -39,3 +39,4 @@ end
 
 gem "dotenv-rails", groups: %i[development test]
 gem "httparty"
+gem "bcrypt"
