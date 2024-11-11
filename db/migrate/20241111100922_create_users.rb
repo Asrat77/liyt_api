@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration[7.2]
       t.string :password_digest
       t.string :business_name, null: false
       t.string :business_email
-      t.json :primary_address, null: false
+      t.json :primary_address
       t.json :secondary_address
 
       t.timestamps
