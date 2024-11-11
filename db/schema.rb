@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_11_100922) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_11_102054) do
+  create_table "drivers", force: :cascade do |t|
+    t.string "first_name", null: false
+    t.string "last_name"
+    t.integer "vehicle_type", null: false
+    t.string "license_plate_number", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
@@ -19,7 +28,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_11_100922) do
     t.string "password_digest"
     t.string "business_name", null: false
     t.string "business_email"
-    t.json "primary_address", null: false
+    t.json "primary_address"
     t.json "secondary_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
