@@ -17,11 +17,11 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "rack-cors", require: "rack/cors"
 
 gem "factory_bot_rails"
+gem "faker"
 
 group :development, :test do
   gem "bullet"
   gem "debug", platforms: %i[mri mingw x64_mingw]
-  gem "faker"
   gem "rspec-rails"
   gem "standard"
 end
