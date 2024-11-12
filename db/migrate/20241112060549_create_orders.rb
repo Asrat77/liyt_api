@@ -5,7 +5,7 @@ class CreateOrders < ActiveRecord::Migration[7.2]
         index: {name: "user_on_orders_indx"},
         foreign_key: {to_table: :users}
 
-      t.references :driver, null: false,
+      t.references :driver, null: true,
         foreign_key: true,
         index: {name: "driver_on_order_indx"},
         foreign_key: {to_table: :users}
