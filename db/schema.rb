@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_11_102054) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_12_060549) do
   create_table "drivers", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name"
@@ -18,6 +18,21 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_11_102054) do
     t.string "license_plate_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "driver_id", null: false
+    t.integer "status", null: false
+    t.json "origin", null: false
+    t.json "destination", null: false
+    t.float "price"
+    t.string "customer_name"
+    t.string "customer_phone_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["driver_id"], name: "driver_on_order_indx"
+    t.index ["user_id"], name: "user_on_orders_indx"
   end
 
   create_table "users", force: :cascade do |t|
@@ -33,4 +48,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_11_102054) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "orders", "users"
+  add_foreign_key "orders", "users", column: "driver_id"
 end
