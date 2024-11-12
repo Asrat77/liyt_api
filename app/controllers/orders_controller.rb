@@ -1,6 +1,12 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show update destroy ]
 
+  def location
+    service = OrderService.new
+    result = service.get_location(params[:name])
+    render json: {payload: result}
+  end
+
   # GET /orders
   def index
     @orders = Order.all
