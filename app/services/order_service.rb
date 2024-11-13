@@ -21,7 +21,6 @@ class OrderService
     # Call the new API to get distance and time
     api_key = ENV["GEBETA_API_KEY"]
     response = HTTParty.get("https://mapapi.gebeta.app/api/v1/route/driving/direction/?la1=#{origin_lat}&lo1=#{origin_lon}&la2=#{destination_lat}&lo2=#{destination_lon}&apiKey=#{api_key}")
-    debugger
 
     # Parse the response
     total_distance = response.parsed_response["totalDistance"] # Adjust based on actual response structure
