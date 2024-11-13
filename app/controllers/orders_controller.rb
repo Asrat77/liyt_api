@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   def location
     service = OrderService.new
     result = service.get_location(params[:name])
-    render json: {payload: result}
+    render json: { payload: result }
   end
 
   # GET /orders

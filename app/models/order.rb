@@ -7,5 +7,5 @@ class Order < ApplicationRecord
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :status, presence: true
 
-  enum :status, {pending: 0, scheduled: 1, in_progress: 2, delivered: 3}
+  enum :status, { pending: 0, scheduled: 1, in_progress: 2, delivered: 3 }
 end
