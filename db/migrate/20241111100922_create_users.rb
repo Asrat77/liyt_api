@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[7.2]
       t.string :last_name, null: false
       t.string :phone_number, null: false
       t.string :email, null: false
-      t.string :password_digest
+      t.string :password_digest, null: false
       t.string :business_name, null: false
       t.string :business_email
       t.json :primary_address

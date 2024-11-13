@@ -18,6 +18,8 @@ gem "rack-cors", require: "rack/cors"
 
 gem "factory_bot_rails"
 gem "faker"
+gem "jwt"
+gem "active_model_serializers"
 
 group :development, :test do
   gem "bullet"
