@@ -11,6 +11,7 @@ end
 
 puts "Created 6 sample orders."
 
+
 test_user = User.find_or_create_by!(
   first_name: "Test",
   last_name: "User",

@@ -92,4 +92,7 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  # Ensure the secret key for JWT is set
+  ENV["SECRET_KEY"] = ENV.fetch("SECRET_KEY") { Rails.application.credentials.secret_key_base }
 end
