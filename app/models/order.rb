@@ -11,7 +11,6 @@ class Order < ApplicationRecord
 
   enum :status, { pending: 0, scheduled: 1, in_progress: 2, delivered: 3 }
 
-  enum status: { pending: 0, scheduled: 1, in_progress: 2, delivered: 3 }
 
   private
 
