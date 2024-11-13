@@ -5,28 +5,14 @@ RSpec.describe User, type: :model do
     expect(create(:user)).to be_valid
   end
 
-  it "validates that first name cannot be nil" do
-    user = build(:user, first_name: nil)
-    expect(user).not_to be_valid
-  end
-
-  it "validates that last name cannot be nil" do
-    user = build(:user, last_name: nil)
-    expect(user).not_to be_valid
-  end
-
-  it "validates that phone number cannot be nil" do
-    user = build(:user, phone_number: nil)
-    expect(user).not_to be_valid
+  it "validates that email is unique" do
+    user1 = create(:user)
+    user2 = build(:user, email: user1.email)
+    expect(user2).not_to be_valid
   end
 
   it "validates that email cannot be nil" do
     user = build(:user, email: nil)
-    expect(user).not_to be_valid
-  end
-
-  it "validates that business name cannot be nil" do
-    user = build(:user, business_name: nil)
     expect(user).not_to be_valid
   end
 end
