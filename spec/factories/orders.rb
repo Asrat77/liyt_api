@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :order do
     user
     driver
-    status { 1 }
+    status { 0 }
     origin { Faker::Address.full_address }
     destination { Faker::Address.full_address }
     price { Faker::Commerce.price }
