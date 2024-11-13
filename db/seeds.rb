@@ -10,3 +10,16 @@ driver = FactoryBot.create(:driver)
 end
 
 puts "Created 6 sample orders."
+
+
+test_user = User.find_or_create_by!(
+  first_name: "Test",
+  last_name: "User",
+  email: "test.user@example.com",
+  phone_number: "123-456-7890",
+  password: "passwordPassword",
+  business_name: "Test Business",
+  business_email: "test.business@example.com"
+)
+
+puts "Created test user: #{test_user.email}"
