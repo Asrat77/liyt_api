@@ -7,6 +7,18 @@ class OrdersController < ApplicationController
     render json: { payload: result }
   end
 
+  def get_price
+    service = OrderService.new
+    origin = params[:origin]
+    destination = params[:destination]
+
+    if origin.present? && destination.present?
+      result = service.calculate_price(origin, destination)
+      render json: { payload: result }
+    else
+      render json: { error: "Origin and destination must be provided." }, status: :unprocessable_entity
+    end
+  end
   # GET /orders
   def index
     @orders = Order.all
