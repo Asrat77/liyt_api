@@ -22,7 +22,6 @@ class OrdersController < ApplicationController
   # GET /orders
   def index
     @orders = Order.all
-
     render json: @orders
   end
 
@@ -56,14 +55,65 @@ class OrdersController < ApplicationController
     @order.destroy!
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
+  # POST /orders/:order_id/accept/:driver_id
+  def accept
+    service = OrderService.new
+    driver_id = params[:driver_id]
+    order_id= params[:order_id]
+    result = service.accept(order_id, driver_id)
+    render json: result, status: :ok
+  rescue StandardError => e
+    render json: { error: e.message }, status: :unprocessable_entity
+  end
 
-    # Only allow a list of trusted parameters through.
-    def order_params
-      params.require(:order).permit(:user_id, :driver_id, :status, :origin, :destination, :price, :customer_name, :customer_phone_number)
+  # POST /orders/:id/complete
+  def complete
+    service = OrderService.new
+    driver_id = params[:driver_id]
+    result = service.complete(@order.id, driver_id)
+    render json: result, status: :ok
+  rescue StandardError => e
+    render json: { error: e.message }, status: :unprocessable_entity
+  end
+
+  # GET /drivers/:driver_id/orders
+  def get_orders_by_driver
+    service = OrderService.new
+    driver_id = params[:driver_id]
+    orders = service.get_orders_by_driver(driver_id)
+
+    if orders.empty?
+      render json: { message: "No orders found for you currently, try again later." }, status: :ok
+    else
+      render json: orders
     end
+  rescue StandardError => e
+    render json: { error: e.message }, status: :unprocessable_entity
+  end
+
+  # GET /users/:user_id/orders
+  def get_orders_by_user
+    service = OrderService.new
+    user_id = params[:user_id]
+    orders = service.get_orders_by_user(user_id)
+
+    if orders.empty?
+      render json: { message: "Looks like you haven't placed any orders yet. Create your first order today!" }, status: :ok
+    else
+      render json: orders
+    end
+  rescue StandardError => e
+    render json: { error: e.message }, status: :unprocessable_entity
+  end
+
+  private
+  # Only allow a list of trusted parameters through.
+
+  def set_order
+    @order = Order.find(params[:id])
+  end
+
+  def order_params
+    params.require(:order).permit(:user_id, :driver_id, :status, :origin, :destination, :price, :customer_name, :customer_phone_number)
+  end
 end

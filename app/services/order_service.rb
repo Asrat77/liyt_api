@@ -42,6 +42,53 @@ class OrderService
     directions
   end
 
+  def accept(order_id, driver_id)
+    order = Order.find(order_id)
+    raise(StandardError, "Order has already been accepted.") unless order.status == "pending"
+    driver = Driver.find(driver_id)
+    debugger
+    raise(StandardError, "Driver not found.") unless driver
+    order.status = "in_progress"
+    order.update!(driver: driver)
+    # order.driver_id = driver.id
+    order.save
+    {message: "Your Order with id #{order.id} has been accepted by our driver#{driver.first_name}"}
+  end
+
+  def complete(order_id, driver_id)
+    order = Order.find(order_id)
+    raise(StandardError, "Order has already been completed.") unless order.status == "in_progress"
+    driver = Driver.find(driver_id)
+    raise(StandardError, "Driver not found.") unless driver
+    order.status = "delivered"
+    order.driver_id = driver.id
+    order.save
+    {message: "Order has been completed by #{driver.first_name}"}
+  end
+
+  # def cancel(order_id)
+  #   order = Order.find(order_id)
+  #   raise(StandardError, "Order has already been cancelled.") unless order.status == "in_progress"
+  #   order.status = "cancelled"
+  #   order.save
+  # end
+
+  def get_orders_by_driver(driver_id)
+    driver = Driver.find(driver_id)
+    raise(StandardError, "Driver not found.") unless driver
+    orders = Order.where(driver_id: driver.id)
+    orders
+  end
+
+  def get_orders_by_user(user_id)
+    user = User.find(user_id)
+    raise(StandardError, "User not found.") unless user
+    orders = Order.where(user_id: user.id)
+    orders
+  end
+
+
+
   private
 
   def parse_location(location)
