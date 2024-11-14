@@ -2,6 +2,11 @@ class AccessController < ApplicationController
   # skip_before_action :authenticate, only: [:login, :signup]
   def login
     user = User.find_by(email: auth_params[:email])
+    unless user
+        render json: { error: "User does not exist, please sign up and try again" }, status: :not_found
+        return
+    end
+
     if user.authenticate(auth_params[:password])
       payload = {
         id: user.id,
