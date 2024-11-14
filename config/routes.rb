@@ -4,14 +4,14 @@ Rails.application.routes.draw do
       get 'get_price', to: 'orders#get_price'
     end
     member do
-      post 'complete', to: 'orders#complete'
     end
   end
   resources :drivers
   resources :users
+  get 'orders/:order_id/complete/:driver_id', to: 'orders#complete'
+  post 'orders/:order_id/accept/:driver_id', to: 'orders#accept'
   get 'drivers/:driver_id/orders', to: 'orders#get_orders_by_driver'
   get 'users/:user_id/orders', to: 'orders#get_orders_by_user'
-  post 'orders/:order_id/accept/:driver_id', to: 'orders#accept'
   post "/login", controller: :access, action: :login
   post "/signup", controller: :access, action: :signup
   get "/location/:name", to: "orders#location", as: "location"

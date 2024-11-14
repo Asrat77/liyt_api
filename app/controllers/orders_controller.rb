@@ -69,8 +69,9 @@ class OrdersController < ApplicationController
   # POST /orders/:id/complete
   def complete
     service = OrderService.new
+    order_id = params[:order_id]
     driver_id = params[:driver_id]
-    result = service.complete(@order.id, driver_id)
+    result = service.complete(order_id, driver_id)
     render json: result, status: :ok
   rescue StandardError => e
     render json: { error: e.message }, status: :unprocessable_entity
