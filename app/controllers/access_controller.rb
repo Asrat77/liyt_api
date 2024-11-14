@@ -20,7 +20,7 @@ class AccessController < ApplicationController
     if @user.save
       payload = {
         id: @user.id,
-        email: @user.email,
+        email: @user.email
       }
       jwt = TokenService.issue(payload)
       render json: { token: jwt, user: payload }, status: :created
@@ -37,6 +37,6 @@ class AccessController < ApplicationController
   end
 
   def signup_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :phone_number, :business_name, :business_email, :primary_address, :secondary_address)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :phone_number, :business_name, :business_email, primary_address: [:latitude, :longitude], secondary_address: [:latitude, :longitude])
   end
 end

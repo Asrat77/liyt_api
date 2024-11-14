@@ -5,19 +5,19 @@ class User < ApplicationRecord
   validates :phone_number, presence: true
   validates :business_name, presence: true
   validates :email, presence: true, uniqueness: true
-  # validates :primary_address, presence: true
 
   def primary_address=(coordinates)
-    if coordinates.present?
-      self[:primary_address] = { "latitude" => coordinates[0], "longitude" => coordinates[1] }
+    if coordinates.is_a?(Hash) && coordinates["latitude"].present? && coordinates["longitude"].present?
+      self[:primary_address] = { "latitude" => coordinates["latitude"], "longitude" => coordinates["longitude"] }
     else
-      self[:primary_address] = nil
+    self[:primary_address] = { "latitude" => nil, "longitude" => nil }
+
     end
   end
 
   def secondary_address=(coordinates)
-    if coordinates.present?
-      self[:secondary_address] = { "latitude" => coordinates[0], "longitude" => coordinates[1] }
+    if coordinates.is_a?(Hash) && coordinates["latitude"].present? && coordinates["longitude"].present?
+      self[:secondary_address] = { "latitude" => coordinates["latitude"], "longitude" => coordinates["longitude"] }
     else
       self[:secondary_address] = nil
     end
