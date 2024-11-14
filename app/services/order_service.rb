@@ -6,11 +6,12 @@ class OrderService
 
   def calculate_price(origin, destination)
     distance_meters, time_taken_seconds = get_distance_and_time(origin, destination)
+    directions = get_directions(origin, destination)
     distance_km = distance_meters / 1000.0
     rate_per_km = 5.0
     time_rate = 0.05
     total_price = (distance_km * rate_per_km) + (time_taken_seconds * time_rate)
-    total_price
+    {"total_price" => total_price, "directions" => directions}
   end
 
   def get_distance_and_time(origin, destination)
@@ -23,9 +24,9 @@ class OrderService
     response = HTTParty.get("https://mapapi.gebeta.app/api/v1/route/driving/direction/?la1=#{origin_lat}&lo1=#{origin_lon}&la2=#{destination_lat}&lo2=#{destination_lon}&apiKey=#{api_key}")
 
     # Parse the response
-    total_distance = response.parsed_response["totalDistance"] # Adjust based on actual response structure
-    time_taken = response.parsed_response["timetaken"] # Adjust based on actual response structure
-    [total_distance, time_taken] # Return both values
+    total_distance = response.parsed_response["totalDistance"]
+    time_taken = response.parsed_response["timetaken"]
+    [total_distance, time_taken]
   end
 
   private
