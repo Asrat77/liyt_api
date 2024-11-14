@@ -46,7 +46,6 @@ class OrderService
     order = Order.find(order_id)
     raise(StandardError, "Order has already been accepted.") unless order.status == "pending"
     driver = Driver.find(driver_id)
-    debugger
     raise(StandardError, "Driver not found.") unless driver
     order.status = "in_progress"
     order.update!(driver: driver)
