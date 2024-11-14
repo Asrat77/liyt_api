@@ -29,6 +29,19 @@ class OrderService
     [total_distance, time_taken]
   end
 
+  def get_directions(origin, destination)
+    # Extract latitude and longitude from the origin and destination
+    origin_lat, origin_lon = parse_location(origin)
+    destination_lat, destination_lon = parse_location(destination)
+
+    # Call the new API to get distance and time
+    api_key = ENV["GEBETA_API_KEY"]
+    response = HTTParty.get("https://mapapi.gebeta.app/api/v1/route/driving/direction/?la1=#{origin_lat}&lo1=#{origin_lon}&la2=#{destination_lat}&lo2=#{destination_lon}&apiKey=#{api_key}")
+
+    directions = response.parsed_response["direction"]
+    directions
+  end
+
   private
 
   def parse_location(location)
