@@ -9,5 +9,9 @@ FactoryBot.define do
     business_email { Faker::Internet.email }
     primary_address { { "latitude" => Faker::Address.latitude, "longitude" => Faker::Address.longitude } }
     secondary_address { { "latitude" => Faker::Address.latitude, "longitude" => Faker::Address.longitude } }
+    
+    vehicle_type { :car }
+    license_plate_number { Faker::Vehicle.license_plate }
+    is_driver { false }
   end
 end
