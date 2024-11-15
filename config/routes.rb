@@ -9,13 +9,12 @@ Rails.application.routes.draw do
   resources :drivers
   resources :users
   get 'orders/:order_id/complete/:driver_id', to: 'orders#complete'
-  post 'orders/:order_id/accept/:driver_id', to: 'orders#accept'
+  get "/orders/:order_id/accept/:driver_id", to: "orders#accept"
   get 'drivers/:driver_id/orders', to: 'orders#get_orders_by_driver'
   get 'users/:user_id/orders', to: 'orders#get_orders_by_user'
   post "/login", controller: :access, action: :login
   post "/signup", controller: :access, action: :signup
   get "/location/:name", to: "orders#location", as: "location"
-  get "/orders/:order_id/accept/:driver_id", to: "orders#accept"
   get "/get_price/:origin/:destination", to: "orders#get_price", as: "get_price"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
