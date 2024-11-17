@@ -6,7 +6,7 @@ class Order < ApplicationRecord
   validates :origin, :destination, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :status, presence: true
-  validate :driver_presence_if_in_progress
+  # validate :driver_presence_if_in_progress
 
 
   enum :status, { pending: 0, scheduled: 1, in_progress: 2, delivered: 3 }

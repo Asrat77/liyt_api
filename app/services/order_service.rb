@@ -47,8 +47,9 @@ class OrderService
     raise(StandardError, "Order has already been accepted.") unless order.status == "pending"
     driver = User.find(driver_id)
     raise(StandardError, "Driver not found.") unless driver
-    order.status = "in_progress"
-    # order.update!(driver: driver)
+    # order.status = "in_progress"
+
+    order.update!(status: "in_progress")
     # order.driver_id = driver.id
     order.save
     {message: "Your Order with id #{order.id} has been accepted by our driver #{driver.first_name}"}
