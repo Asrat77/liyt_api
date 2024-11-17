@@ -48,10 +48,10 @@ class OrderService
     driver = User.find(driver_id)
     raise(StandardError, "Driver not found.") unless driver
     order.status = "in_progress"
-    order.update!(driver: driver)
+    # order.update!(driver: driver)
     # order.driver_id = driver.id
     order.save
-    {message: "Your Order with id #{order.id} has been accepted by our driver#{driver.first_name}"}
+    {message: "Your Order with id #{order.id} has been accepted by our driver #{driver.first_name}"}
   end
 
   def complete(order_id, driver_id)
