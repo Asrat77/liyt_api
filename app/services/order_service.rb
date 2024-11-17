@@ -45,7 +45,7 @@ class OrderService
   def accept(order_id, driver_id)
     order = Order.find(order_id)
     raise(StandardError, "Order has already been accepted.") unless order.status == "pending"
-    driver = Driver.find(driver_id)
+    driver = User.find(driver_id)
     raise(StandardError, "Driver not found.") unless driver
     order.status = "in_progress"
     order.update!(driver: driver)
@@ -57,7 +57,7 @@ class OrderService
   def complete(order_id, driver_id)
     order = Order.find(order_id)
     raise(StandardError, "Order has already been completed.") unless order.status == "in_progress"
-    driver = Driver.find(driver_id)
+    driver = User.find(driver_id)
     raise(StandardError, "Driver not found.") unless driver
     order.status = "delivered"
     order.driver_id = driver.id
@@ -73,7 +73,7 @@ class OrderService
   # end
 
   def get_orders_by_driver(driver_id)
-    driver = Driver.find(driver_id)
+    driver = User.find(driver_id)
     raise(StandardError, "Driver not found.") unless driver
     orders = Order.where(driver_id: driver.id)
     orders
