@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
 
-  before_action :authenticate
+  # before_action :authenticate
 
   def current_user
     return if token.nil?

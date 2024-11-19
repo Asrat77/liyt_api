@@ -1,5 +1,5 @@
 class AccessController < ApplicationController
-  skip_before_action :authenticate, only: [:login, :signup]
+  # skip_before_action :authenticate, only: [:login, :signup]
   def login
     user = User.find_by(email: auth_params[:email])
     unless user
