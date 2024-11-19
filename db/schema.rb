@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_14_090541) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_19_132927) do
+  create_table "api_keys", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "key", null: false
+    t.string "name"
+    t.datetime "expires_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["key"], name: "index_api_keys_on_key"
+    t.index ["user_id"], name: "index_api_keys_on_user_id"
+  end
+
   create_table "drivers", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name"
@@ -53,6 +64,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_14_090541) do
     t.index ["license_plate_number"], name: "index_users_on_license_plate_number", unique: true
   end
 
+  add_foreign_key "api_keys", "users"
   add_foreign_key "orders", "users"
   add_foreign_key "orders", "users", column: "driver_id"
 end
