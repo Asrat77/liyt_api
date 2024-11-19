@@ -26,6 +26,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_14_090541) do
     t.integer "status", null: false
     t.json "origin", null: false
     t.json "destination", null: false
+    t.string "origin_name"
+    t.string "destination_name"
     t.float "price"
     t.string "customer_name"
     t.string "customer_phone_number"
