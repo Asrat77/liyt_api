@@ -2,7 +2,6 @@ class ApiKey < ApplicationRecord
   belongs_to :user
 
   validates :key, presence: true, uniqueness: true
-  validates :expires_at, presence: true
   validate :expires_at_must_be_in_the_future
 
   before_validation :generate_unique_key, on: :create

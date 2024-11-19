@@ -24,4 +24,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  resources :api_keys, only: [:index, :create, :destroy, :show] do
+    member do
+      post :revoke  # Action to revoke a specific API key
+    end
+    collection do
+      post :rotate  # Action to rotate all API keys for the user
+    end
+  end
 end

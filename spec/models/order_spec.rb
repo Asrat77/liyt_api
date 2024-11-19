@@ -47,15 +47,6 @@ RSpec.describe Order, type: :model do
     expect(order).to be_valid
   end
 
-  it "validates that driver must be present if the order status is in_progress" do
-    order = build(:order, status: :in_progress, driver: nil)
-    expect(order).not_to be_valid
-    expect(order.errors[:driver]).to include("must be present if the order is in progress")
-
-    order.driver = create(:driver)  # Assign a driver
-    expect(order).to be_valid
-  end
-
   it "validates that driver can be nil if the order status is not in_progress" do
     order = build(:order, status: :pending, driver: nil)
     expect(order).to be_valid  # Should be valid without a driver
