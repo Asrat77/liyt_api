@@ -2,9 +2,7 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :driver, optional: true
 
-  validates :customer_name, presence: true
-  validates :origin, :destination, presence: true
-  validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates :status, presence: true
   # validate :driver_presence_if_in_progress
 

@@ -10,8 +10,8 @@ class CreateOrders < ActiveRecord::Migration[7.2]
         index: { name: "driver_on_order_indx" },
         foreign_key: { to_table: :users }
       t.integer :status, null: false
-      t.json :origin, null: false
-      t.json :destination, null: false
+      t.json :origin
+      t.json :destination
       t.string :origin_name
       t.string :destination_name
       t.float :price
