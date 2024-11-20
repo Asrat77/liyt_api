@@ -33,4 +33,11 @@ Rails.application.routes.draw do
       post :rotate  # Action to rotate all API keys for the user
     end
   end
+  namespace :api do
+    namespace :v1 do
+      resources :orders, param: :api_key, only: [:index]
+      post '/orders/init', to: 'orders#init'
+      post '/orders/:id', to: 'orders#create'
+    end
+  end
 end

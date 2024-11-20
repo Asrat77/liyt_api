@@ -10,7 +10,7 @@ class ApiKey < ApplicationRecord
 
   def generate_unique_key
     self.key ||= loop do
-      generated_key = SecureRandom.hex(10)
+      generated_key = SecureRandom.hex(32)
       break generated_key unless ApiKey.exists?(key: generated_key)
     end
   end
