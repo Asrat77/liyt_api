@@ -9,18 +9,25 @@ module Api
       end
 
       def init
-        @order = Order.new(order_params)
-        @order.user_id = @user_id
-        @order.status = "scheduled"
-        primary_address = User.find(@user_id).primary_address
-        latitude = primary_address["latitude"]
-        longitude = primary_address["longitude"]
-        @order.origin = "#{latitude}, #{longitude}"
-        @order.price = 0 # Set initial price
+        primary_address = User.where(id: @user_id).pluck(:primary_address).first
+        latitude, longitude = primary_address.values_at("latitude", "longitude")
+
+        @order = Order.new(
+          order_params.merge(
+            user_id: @user_id,
+            status: "scheduled",
+            origin: "#{latitude}, #{longitude}",
+            price: 0 # Set initial price
+          )
+        )
+
         if @order.save
-          render json: { message: "Order has been successfully Initialized",
-                      order_id: @order.id,
-                      redirect_url: "https://litetest.vercel.app/Redirect/#{@order.id}" }
+
+          render json: {
+            message: "Order has been successfully Initialized",
+            order_id: @order.id,
+            redirect_url: "https://litetest.vercel.app/Redirect/#{@order.id}"
+          }
         else
           render json: @order.errors, status: :unprocessable_entity
         end
@@ -29,7 +36,7 @@ module Api
       def create
         @order = Order.find(params[:id]) # Find the initialized order
         update_params = order_complete_params.merge({
-          status: "scheduled",
+          status: "pending",
           price: params[:order][:price].to_f # Ensure the price is a float
         })
 
