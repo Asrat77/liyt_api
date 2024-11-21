@@ -10,13 +10,13 @@ class AccessController < ApplicationController
     if user.authenticate(auth_params[:password])
       payload = {
         id: user.id,
-        email: user.email,
+        email: user.email
       }
       jwt = TokenService.issue(payload)
-        render json: {token: jwt, user: payload}
+        render json: { token: jwt, user: payload }
       else
-        render json: {error: "Invalid password."}, status: 400
-      end
+        render json: { error: "Invalid password." }, status: 400
+    end
   end
 
   def signup
@@ -42,6 +42,6 @@ class AccessController < ApplicationController
   end
 
   def signup_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :phone_number, :business_name, :business_email, primary_address: [:latitude, :longitude], secondary_address: [:latitude, :longitude])
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :phone_number, :business_name, :business_email, primary_address: [ :latitude, :longitude ], secondary_address: [ :latitude, :longitude ])
   end
 end

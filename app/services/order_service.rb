@@ -11,7 +11,7 @@ class OrderService
     rate_per_km = 5.0
     time_rate = 0.05
     total_price = (distance_km * rate_per_km) + (time_taken_seconds * time_rate)
-    {"total_price" => total_price, "directions" => directions}
+    { "total_price" => total_price, "directions" => directions }
   end
 
   def get_distance_and_time(origin, destination)
@@ -26,7 +26,7 @@ class OrderService
     # Parse the response
     total_distance = response.parsed_response["totalDistance"]
     time_taken = response.parsed_response["timetaken"]
-    [total_distance, time_taken]
+    [ total_distance, time_taken ]
   end
 
   def get_directions(origin, destination)
@@ -52,7 +52,7 @@ class OrderService
     order.update!(status: "in_progress")
     # order.driver_id = driver.id
     order.save
-    {message: "Your Order with id #{order.id} has been accepted by our driver #{driver.first_name}"}
+    { message: "Your Order with id #{order.id} has been accepted by our driver #{driver.first_name}" }
   end
 
   def complete(order_id, driver_id)
@@ -63,7 +63,7 @@ class OrderService
     order.status = "delivered"
     order.driver_id = driver.id
     order.save
-    {message: "Order has been completed by #{driver.first_name}"}
+    { message: "Order has been completed by #{driver.first_name}" }
   end
 
   # def cancel(order_id)
@@ -93,7 +93,7 @@ class OrderService
 
   def parse_location(location)
     # Assuming location is a string in the format "latitude,longitude"
-    lat, lon = location.split(',').map(&:strip)
-    [lat, lon]
+    lat, lon = location.split(",").map(&:strip)
+    [ lat, lon ]
   end
 end

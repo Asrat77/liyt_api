@@ -13,7 +13,7 @@ class Order < ApplicationRecord
   private
 
   def driver_presence_if_in_progress
-    if status == 'in_progress' && driver.nil?
+    if status == "in_progress" && driver.nil?
       errors.add(:driver, "must be present if the order is in progress")
     end
   end

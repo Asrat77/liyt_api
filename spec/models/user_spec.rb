@@ -16,7 +16,7 @@ RSpec.describe User, type: :model do
     expect(user).not_to be_valid
   end
 
-  
+
 
   it "validates that license_plate_number is unique" do
     user1 = create(:user, license_plate_number: "ABC123")

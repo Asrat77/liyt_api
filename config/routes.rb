@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
   resources :orders do
     collection do
-      get 'get_price', to: 'orders#get_price'
+      get "get_price", to: "orders#get_price"
     end
     member do
     end
   end
   resources :drivers
   resources :users
-  get 'orders/:order_id/complete/:driver_id', to: 'orders#complete'
+  get "orders/:order_id/complete/:driver_id", to: "orders#complete"
   get "/orders/:order_id/accept/:driver_id", to: "orders#accept"
-  get 'drivers/:driver_id/orders', to: 'orders#get_orders_by_driver'
-  get 'users/:user_id/orders', to: 'orders#get_orders_by_user'
+  get "drivers/:driver_id/orders", to: "orders#get_orders_by_driver"
+  get "users/:user_id/orders", to: "orders#get_orders_by_user"
   post "/login", controller: :access, action: :login
   post "/signup", controller: :access, action: :signup
   get "/location/:name", to: "orders#location", as: "location"
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :api_keys, only: [:index, :create, :destroy, :show] do
+  resources :api_keys, only: [ :index, :create, :destroy, :show ] do
     member do
       post :revoke  # Action to revoke a specific API key
     end
@@ -35,9 +35,9 @@ Rails.application.routes.draw do
   end
   namespace :api do
     namespace :v1 do
-      resources :orders, param: :api_key, only: [:index]
-      post '/orders/init', to: 'orders#init'
-      post '/orders/:id', to: 'orders#create'
+      resources :orders, param: :api_key, only: [ :index ]
+      post "/orders/init", to: "orders#init"
+      post "/orders/:id", to: "orders#create"
     end
   end
 end

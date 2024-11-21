@@ -18,9 +18,9 @@ module Api
         @order.origin = "#{latitude}, #{longitude}"
         @order.price = 0 # Set initial price
         if @order.save
-          render json: {message: "Order has been successfully Initialized",
+          render json: { message: "Order has been successfully Initialized",
                       order_id: @order.id,
-                      redirect_url: "https://litetest.vercel.app/Redirect/#{@order.id}"}
+                      redirect_url: "https://litetest.vercel.app/Redirect/#{@order.id}" }
         else
           render json: @order.errors, status: :unprocessable_entity
         end

@@ -1,5 +1,4 @@
 class ApiKeysController < ApplicationController
-
   # GET /api/v1/api_keys
   def index
     api_keys = current_user.api_keys
