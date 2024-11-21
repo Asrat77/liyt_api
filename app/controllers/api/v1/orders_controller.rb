@@ -3,11 +3,15 @@ module Api
     class OrdersController < ApplicationController
       before_action :authenticate_api_key
 
-      def index
-        orders = Order.all
-        render json: orders, status: :ok
-      end
-
+      # POST /api/v1/orders/init
+      # Initializes a new order for the authenticated user.
+      #
+      # This method retrieves the user's primary address and creates a new order
+      # with the status set to "scheduled" and an initial price of 0.
+      #
+      # Returns:
+      # - JSON response with a success message, order ID, and redirect URL if successful.
+      # - JSON response with error messages if the order could not be saved.
       def init
         primary_address = User.where(id: @user_id).pluck(:primary_address).first
         latitude, longitude = primary_address.values_at("latitude", "longitude")
@@ -22,7 +26,6 @@ module Api
         )
 
         if @order.save
-
           render json: {
             message: "Order has been successfully Initialized",
             order_id: @order.id,
@@ -33,6 +36,16 @@ module Api
         end
       end
 
+      # POST /api/v1/orders/create
+      # Completes the order initialization and creates a new order.
+      #
+      # This method finds the initialized order by ID and updates it with the
+      # provided parameters, setting the status to "pending" and ensuring the
+      # price is a float.
+      #
+      # Returns:
+      # - JSON response with a success message and the created order if successful.
+      # - JSON response with error messages if the order could not be updated.
       def create
         @order = Order.find(params[:id]) # Find the initialized order
         update_params = order_complete_params.merge({
@@ -49,6 +62,11 @@ module Api
 
       private
 
+      # Authenticates the API key provided in the request parameters.
+      # Sets the @user_id instance variable if the API key is valid.
+      #
+      # Returns:
+      # - JSON response with an error message if the API key is invalid.
       def authenticate_api_key
         api_key = params[:api_key]
         @api_key = ApiKey.find_by(key: api_key)
@@ -60,10 +78,18 @@ module Api
         end
       end
 
+      # Strong parameters for order initialization.
+      #
+      # Returns:
+      # - Permitted parameters for order initialization.
       def order_params
         params.permit(:user_id)
       end
 
+      # Strong parameters for completing an order.
+      #
+      # Returns:
+      # - Required parameters for completing an order.
       def order_complete_params
         params.require(:order).permit(
           :destination,
