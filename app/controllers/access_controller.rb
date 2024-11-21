@@ -10,7 +10,8 @@ class AccessController < ApplicationController
     if user.authenticate(auth_params[:password])
       payload = {
         id: user.id,
-        email: user.email
+        email: user.email,
+        is_driver: user.is_driver
       }
       jwt = TokenService.issue(payload)
         render json: { token: jwt, user: payload }
