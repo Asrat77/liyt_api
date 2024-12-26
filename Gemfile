@@ -7,7 +7,7 @@ gem "bootsnap", require: false
 gem "active_model_serializers"
 gem "puma", "~> 6.0"
 gem "rails", "~> 7.2.1"
-gem "sqlite3", "~> 2.2"
+gem "sqlite3", "~> 2.5"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
