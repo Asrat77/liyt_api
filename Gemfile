@@ -6,7 +6,7 @@ ruby "3.3.0"
 gem "bootsnap", require: false
 gem "active_model_serializers"
 gem "puma", "~> 6.6"
-gem "rails", "~> 7.2.1"
+gem "rails", "~> 8.0.2"
 gem "sqlite3", "~> 2.2"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
