@@ -24,4 +24,4 @@ RUN bundle install
 COPY . .
 
 EXPOSE 8080
-CMD ["sh", "-c", "bundle exec rake db:create db:migrate && ./bin/rails server -b 0.0.0.0"]
+CMD ["sh", "-c", "bundle exec rake db:create db:migrate && ./bin/rails server -b 0.0.0.0 -p 8080"]
