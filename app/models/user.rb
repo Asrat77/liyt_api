@@ -11,7 +11,7 @@ class User < ApplicationRecord
   validates :license_plate_number, uniqueness: true, allow_nil: true
 
   # Enum for vehicle types
-  enum vehicle_type: { car: 0, motorcycle: 1 }
+  enum :vehicle_type, { car: 0, motorcycle: 1 }
 
   # Setter for primary_address
   # Accepts a hash with latitude and longitude and sets the primary_address attribute.
