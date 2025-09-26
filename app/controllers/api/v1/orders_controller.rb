@@ -69,7 +69,6 @@ module Api
       # - JSON response with an error message if the API key is invalid.
       def authenticate_api_key
         api_key = params[:api_key]
-        debugger
         @api_key = ApiKey.find_by(key: api_key)
 
         if @api_key
