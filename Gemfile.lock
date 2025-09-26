@@ -142,7 +142,6 @@ GEM
       net-smtp
     marcel (1.0.4)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.9)
     minitest (5.25.1)
     msgpack (1.7.3)
     multi_xml (0.7.1)
@@ -281,8 +280,10 @@ GEM
     spring (4.2.1)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
-    sqlite3 (2.2.0)
-      mini_portile2 (~> 2.8.0)
+    sqlite3 (2.7.4-aarch64-linux-gnu)
+    sqlite3 (2.7.4-arm64-darwin)
+    sqlite3 (2.7.4-x86_64-darwin)
+    sqlite3 (2.7.4-x86_64-linux-gnu)
     standard (1.41.1)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
@@ -336,7 +337,7 @@ DEPENDENCIES
   simplecov
   spring
   spring-commands-rspec
-  sqlite3 (~> 2.2)
+  sqlite3 (~> 2.7)
   standard
   timecop
   tzinfo-data
