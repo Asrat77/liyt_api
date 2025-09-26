@@ -1,7 +1,7 @@
 module Api
   module V1
     class OrdersController < ApplicationController
-      # before_action :authenticate_api_key
+      before_action :authenticate_api_key
 
       # POST /api/v1/orders/init
       # Initializes a new order for the authenticated user.
@@ -69,12 +69,13 @@ module Api
       # - JSON response with an error message if the API key is invalid.
       def authenticate_api_key
         api_key = params[:api_key]
+        debugger
         @api_key = ApiKey.find_by(key: api_key)
 
-        unless @api_key
-          render json: { error: "Invalid or inactive API key" }, status: :unauthorized
-        else
+        if @api_key
           @user_id = @api_key.user_id
+        else
+          render json: { error: "Invalid or inactive API key" }, status: :unauthorized and return
         end
       end
 
