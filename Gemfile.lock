@@ -169,6 +169,10 @@ GEM
     parser (3.3.6.0)
       ast (~> 2.4.1)
       racc
+    pg (1.6.2-aarch64-linux)
+    pg (1.6.2-arm64-darwin)
+    pg (1.6.2-x86_64-darwin)
+    pg (1.6.2-x86_64-linux)
     psych (5.2.0)
       stringio
     puma (6.6.0)
@@ -248,9 +252,22 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.34.1)
       parser (>= 3.3.1.0)
+    rubocop-minitest (0.36.0)
+      rubocop (>= 1.61, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
     rubocop-performance (1.22.1)
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
+    rubocop-rails (2.29.1)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.52.0, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
+    rubocop-rails-omakase (1.0.0)
+      rubocop
+      rubocop-minitest
+      rubocop-performance
+      rubocop-rails
     ruby-progressbar (1.13.0)
     securerandom (0.3.2)
     shoulda-matchers (6.4.0)
@@ -309,10 +326,12 @@ DEPENDENCIES
   faker
   httparty
   jwt
+  pg (~> 1.5)
   puma (~> 6.6)
   rack-cors
   rails (~> 7.2.1)
   rspec-rails
+  rubocop-rails-omakase
   shoulda-matchers
   simplecov
   spring
