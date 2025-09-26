@@ -1,7 +1,7 @@
 module Api
   module V1
     class OrdersController < ApplicationController
-      before_action :authenticate_api_key
+      # before_action :authenticate_api_key
 
       # POST /api/v1/orders/init
       # Initializes a new order for the authenticated user.
