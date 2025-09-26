@@ -40,5 +40,6 @@ module LiytApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.hosts << "liyt-api-849543905413.europe-west1.run.app"
   end
 end
