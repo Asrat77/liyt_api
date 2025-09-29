@@ -24,7 +24,7 @@ production:
   adapter: postgresql
   encoding: unicode
   database: liyt-db-1
-  host: bits-cicd:us-central1:liyt
+  host: bits-cicd:us-central1:liyt-db-1
   port: 5432
   username: postgres
   password: <%= ENV['DATABASE_PASSWORD'] %>
